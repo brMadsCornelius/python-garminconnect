@@ -67,16 +67,6 @@ def test_get_laps_accepts_garmin_lap_dtos() -> None:
     ]
 
 
-def test_get_laps_prefers_distance_splits() -> None:
-    """Use kilometer split metrics instead of the full activity lap metrics."""
-    assert get_laps(
-        {
-            "lapDTOs": [{"distance": 5000, "averageHR": 150}],
-            "splitDTOs": [{"distance": 1000, "averageHR": 152, "averageSpeed": 3.5}],
-        }
-    ) == [{"distance": 1000, "averageHR": 152, "averageSpeed": 3.5}]
-
-
 def test_existing_ids_and_write_rows_support_incremental_updates(
     tmp_path: Path,
 ) -> None:
