@@ -44,8 +44,8 @@ def format_pace(speed_metres_per_second: Any) -> str:
 
 
 def get_laps(splits: dict[str, Any]) -> list[dict[str, Any]]:
-    """Extract lap records from Garmin's activity-splits response."""
-    for key in ("lapDTOs", "laps"):
+    """Extract distance split records from Garmin's activity-splits response."""
+    for key in ("splitDTOs", "lapDTOs", "laps"):
         laps = splits.get(key)
         if isinstance(laps, list):
             return [lap for lap in laps if isinstance(lap, dict)]
