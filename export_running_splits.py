@@ -3,6 +3,7 @@
 
 import argparse
 import csv
+import logging
 import os
 from collections.abc import Iterable
 from datetime import timedelta
@@ -12,6 +13,7 @@ from typing import Any
 
 from garminconnect import Garmin
 
+logger = logging.getLogger(__name__)
 FIELDNAMES = [
     "activity_id",
     "activity_name",
@@ -216,8 +218,11 @@ def main() -> None:
         )
         new_activities += 1
     write_rows(args.output, existing_rows + new_rows)
-    print(f"Exported {new_activities} new running activities to {args.output}.")
+    logger.info(
+        "Exported %d new running activities to %s.", new_activities, args.output
+    )
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
     main()
