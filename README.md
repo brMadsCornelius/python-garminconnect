@@ -104,6 +104,28 @@ python3 ./example.py   # simple getting-started example
 python3 ./demo.py      # comprehensive demo (130+ API methods)
 ```
 
+### Export running splits to CSV
+
+`export_running_splits.py` creates a spreadsheet-friendly CSV with one row per
+running lap, including distance, average pace, and average heart rate.
+
+```bash
+python3 ./export_running_splits.py
+```
+
+On the first run, enter your Garmin credentials (and MFA code when prompted).
+The script saves reusable tokens in `~/.garminconnect` and writes
+`your_data/running_splits.csv`. The `your_data/` directory is ignored by Git.
+Later runs fetch all running activity summaries but download splits only for
+new activity IDs, then append them safely to the existing export. Run it after
+syncing your watch, or schedule the same command with your operating system's
+task scheduler.
+
+Use `--refresh` to rebuild the CSV when an existing Garmin activity was
+changed, `--output` to choose a different CSV path, and `--tokenstore` to use
+a different token directory. You can set `EMAIL`, `PASSWORD`, and
+`GARMINTOKENS` environment variables for non-interactive scheduled runs.
+
 ## 🛠️ Development
 
 This project uses [PDM](https://pdm.fming.dev/) for dependency management and task automation.
